@@ -14,7 +14,7 @@ npx create-next-app@latest . --typescript --biome --tailwind --app --src-dir  --
 npm install @neondatabase/serverless @neondatabase/auth@latest
 ```
 
-- database neon schema
+### database neon schema
 
 ```bash
 npm run db:up
