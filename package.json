@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "biome check",
-    "format": "biome format --write",
+    "format": "biome format . --write",
+    "lint": "biome check . --write",
     "db:reset": "dotenv -e .env.local -- sh -c 'psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -c \"BEGIN; DROP SCHEMA IF EXISTS app CASCADE; COMMIT;\" && psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f ./docs/db/schema.sql'",
     "db:fixtures": "dotenv -e .env.local -- psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f ./db/fixtures/00_all.sql",
     "db:up": "dotenv -e .env.local -- sh -c 'set -e; files=$(find ./db/migrations -maxdepth 1 -type f -name \"*.up.sql\" | sort); [ -n \"$files\" ] || { echo \"No up migrations found\"; exit 0; }; for f in $files; do echo \"Applying $f\"; psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f \"$f\"; done'",
@@ -20,7 +20,8 @@
     "@neondatabase/serverless": "^1.0.2",
     "next": "16.1.7",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "ws": "^8.19.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
@@ -28,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/ws": "^8.18.1",
     "babel-plugin-react-compiler": "1.0.0",
     "dotenv-cli": "^11.0.0",
     "tailwindcss": "^4",

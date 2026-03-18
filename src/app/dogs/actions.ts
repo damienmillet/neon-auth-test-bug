@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { emitPetEvent } from "@/lib/pet-events";
 import { createDog } from "@/lib/pets";
 import type { PetFormState } from "@/components/pet-create-form";
 
@@ -32,6 +33,12 @@ export async function createDogAction(
     breed: breed || null,
     ageYears,
     ownerEmail: ownerEmail || null,
+  });
+
+  await emitPetEvent({
+    type: "dog.created",
+    petName: name,
+    createdAt: new Date().toISOString(),
   });
 
   revalidatePath("/dogs");
