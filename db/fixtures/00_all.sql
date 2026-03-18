@@ -2,20 +2,59 @@ BEGIN;
 
 TRUNCATE TABLE app.cat, app.dog RESTART IDENTITY;
 
+INSERT INTO neon_auth."user" (
+  name,
+  email,
+  "emailVerified",
+  image,
+  role,
+  banned
+)
+VALUES
+  (
+    'Alice Martin',
+    'alice.martin+fixtures@example.com',
+    true,
+    'https://api.dicebear.com/9.x/initials/svg?seed=Alice%20Martin',
+    'user',
+    false
+  ),
+  (
+    'Benoit Leroy',
+    'benoit.leroy+fixtures@example.com',
+    true,
+    'https://api.dicebear.com/9.x/initials/svg?seed=Benoit%20Leroy',
+    'user',
+    false
+  ),
+  (
+    'Chloe Bernard',
+    'chloe.bernard+fixtures@example.com',
+    true,
+    'https://api.dicebear.com/9.x/initials/svg?seed=Chloe%20Bernard',
+    'admin',
+    false
+  )
+ON CONFLICT (email) DO UPDATE
+SET
+  name = EXCLUDED.name,
+  "emailVerified" = EXCLUDED."emailVerified",
+  image = EXCLUDED.image,
+  role = EXCLUDED.role,
+  banned = EXCLUDED.banned,
+  "updatedAt" = CURRENT_TIMESTAMP;
+
 WITH selected_owners AS (
   SELECT
     (
       SELECT id
       FROM neon_auth."user"
-      ORDER BY "createdAt", id
-      LIMIT 1
+      WHERE email = 'alice.martin+fixtures@example.com'
     ) AS owner_1,
     (
       SELECT id
       FROM neon_auth."user"
-      ORDER BY "createdAt", id
-      OFFSET 1
-      LIMIT 1
+      WHERE email = 'benoit.leroy+fixtures@example.com'
     ) AS owner_2
 ),
 cat_seed AS (
@@ -44,15 +83,12 @@ WITH selected_owners AS (
     (
       SELECT id
       FROM neon_auth."user"
-      ORDER BY "createdAt", id
-      LIMIT 1
+      WHERE email = 'alice.martin+fixtures@example.com'
     ) AS owner_1,
     (
       SELECT id
       FROM neon_auth."user"
-      ORDER BY "createdAt", id
-      OFFSET 1
-      LIMIT 1
+      WHERE email = 'benoit.leroy+fixtures@example.com'
     ) AS owner_2
 ),
 dog_seed AS (
