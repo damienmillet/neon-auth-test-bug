@@ -1,4 +1,4 @@
-import { neon } from "@neondatabase/serverless";
+import { getSql } from "@/lib/db";
 
 type PetRow = {
   id: number;
@@ -17,16 +17,6 @@ type NewPetInput = {
   ageYears: number | null;
   ownerEmail: string | null;
 };
-
-function getSql() {
-  const databaseUrl = process.env.DATABASE_URL;
-
-  if (!databaseUrl) {
-    throw new Error("DATABASE_URL environment variable must be set");
-  }
-
-  return neon(databaseUrl);
-}
 
 export async function getCats(): Promise<Pet[]> {
   const sql = getSql();
