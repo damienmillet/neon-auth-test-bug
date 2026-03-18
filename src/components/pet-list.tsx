@@ -16,73 +16,75 @@ export function PetList({
   const totalWithOwner = pets.filter((pet) => pet.owner_name).length;
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-      <div className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <div className="mb-10 grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div className="max-w-2xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300">
-            Database Records
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[var(--accent)]">
+            Live Directory
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h1 className="font-display text-5xl font-semibold tracking-tight text-[var(--ink)] sm:text-6xl">
             {title}
           </h1>
-          <p className="mt-3 max-w-xl text-sm leading-6 text-white/65 sm:text-base">
+          <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--muted)] sm:text-base">
             {description}
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:min-w-72">
-          <div className="rounded-3xl border border-white/10 bg-white/6 p-4">
-            <p className="text-xs uppercase tracking-[0.24em] text-white/45">Total</p>
-            <p className="mt-3 text-3xl font-semibold text-white">{pets.length}</p>
+          <div className="rounded-[1.75rem] border border-[var(--line)] bg-[var(--surface-strong)] p-4 shadow-[0_12px_40px_rgba(0,0,0,0.20)]">
+            <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">Total</p>
+            <p className="mt-3 text-3xl font-semibold text-[var(--ink)]">{pets.length}</p>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-cyan-400/10 p-4">
-            <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/80">With Owner</p>
-            <p className="mt-3 text-3xl font-semibold text-cyan-100">{totalWithOwner}</p>
+          <div className="rounded-[1.75rem] border border-[rgba(152,180,138,0.22)] bg-[rgba(152,180,138,0.10)] p-4 shadow-[0_12px_40px_rgba(0,0,0,0.20)]">
+            <p className="text-xs uppercase tracking-[0.24em] text-[var(--accent-alt)]">With Owner</p>
+            <p className="mt-3 text-3xl font-semibold text-[var(--ink)]">{totalWithOwner}</p>
           </div>
         </div>
       </div>
 
       {pets.length === 0 ? (
-        <div className="rounded-[2rem] border border-dashed border-white/15 bg-white/4 p-10 text-sm text-white/65">
+        <div className="rounded-[2rem] border border-dashed border-[var(--line)] bg-[var(--surface-strong)] p-10 text-sm text-[var(--muted)]">
           {emptyLabel}
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {pets.map((pet) => (
             <article
               key={pet.id}
-              className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/6 p-5 shadow-[0_20px_80px_rgba(2,6,23,0.38)] transition hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-white/8"
+              className="group relative overflow-hidden rounded-[2rem] border border-[var(--line)] bg-[var(--surface-strong)] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.24)] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(0,0,0,0.34)]"
             >
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-cyan-300/10 to-transparent opacity-80 transition group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[rgba(217,119,87,0.12)] to-transparent opacity-90" />
 
-              <div className="relative mb-5 flex items-start justify-between gap-4">
+              <div className="relative mb-6 flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.25em] text-white/45">
+                  <p className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
                     #{pet.id}
                   </p>
-                  <h2 className="mt-2 text-2xl font-medium text-white">{pet.name}</h2>
+                  <h2 className="font-display mt-2 text-3xl font-semibold text-[var(--ink)]">
+                    {pet.name}
+                  </h2>
                 </div>
-                <span className="rounded-full border border-cyan-300/12 bg-cyan-400/12 px-3 py-1 text-xs font-medium text-cyan-200">
+                <span className="rounded-full border border-[var(--line)] bg-[var(--accent-soft)] px-3 py-1 text-xs font-medium text-[var(--accent)]">
                   {pet.breed ?? "Unknown breed"}
                 </span>
               </div>
 
-              <dl className="relative space-y-3 text-sm text-white/72">
-                <div className="flex items-center justify-between gap-4 border-t border-white/8 pt-3">
+              <dl className="relative space-y-3 text-sm text-[var(--muted)]">
+                <div className="flex items-center justify-between gap-4 border-t border-[var(--line)] pt-3">
                   <dt>Age</dt>
-                  <dd className="font-medium text-white/88">
+                  <dd className="font-medium text-[var(--ink)]">
                     {pet.age_years === null ? "Unknown" : `${pet.age_years} years`}
                   </dd>
                 </div>
-                <div className="flex items-center justify-between gap-4 border-t border-white/8 pt-3">
+                <div className="flex items-center justify-between gap-4 border-t border-[var(--line)] pt-3">
                   <dt>Owner</dt>
-                  <dd className="text-right font-medium text-white/88">
+                  <dd className="text-right font-medium text-[var(--ink)]">
                     {pet.owner_name ?? "No owner assigned"}
                   </dd>
                 </div>
-                <div className="flex items-center justify-between gap-4 border-t border-white/8 pt-3">
+                <div className="flex items-center justify-between gap-4 border-t border-[var(--line)] pt-3">
                   <dt>Email</dt>
-                  <dd className="truncate text-right text-white/52">
+                  <dd className="truncate text-right text-[var(--ink)]/72">
                     {pet.owner_email ?? "-"}
                   </dd>
                 </div>

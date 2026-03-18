@@ -1,36 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --page-bg: #111315;
+  --surface: rgba(28, 31, 35, 0.84);
+  --surface-strong: #171a1e;
+  --line: rgba(244, 235, 221, 0.12);
+  --ink: #f4ebdd;
+  --muted: #b8aea1;
+  --accent: #d97757;
+  --accent-soft: rgba(217, 119, 87, 0.16);
+  --accent-alt: #98b48a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-background: var(--page-bg);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), sans-serif;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: var(--font-body), sans-serif;
 }
 
 ::selection {
-  background: rgba(103, 232, 249, 0.35);
-  color: #f8fafc;
+  background: rgba(217, 119, 87, 0.28);
+  color: #fff8ef;
 }
 
 a,
 button {
   -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), serif;
 }

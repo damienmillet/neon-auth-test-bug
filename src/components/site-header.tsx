@@ -13,17 +13,17 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/75 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(19,22,25,0.86)] shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
         <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/12 text-sm font-semibold text-cyan-100">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface-strong)] text-sm font-semibold text-[var(--accent)] shadow-[0_8px_30px_rgba(0,0,0,0.22)]">
             NP
           </span>
           <span>
-            <span className="block text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300/85">
+            <span className="block text-xs font-semibold uppercase tracking-[0.3em] text-[var(--accent)]">
               Neon Auth
             </span>
-            <span className="block text-lg font-semibold tracking-tight text-white">
+            <span className="font-display block text-xl font-semibold tracking-tight text-[var(--ink)]">
               Pets Directory
             </span>
           </span>
@@ -32,7 +32,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-3">
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 sm:flex"
+            className="hidden items-center gap-1 rounded-full border border-[var(--line)] bg-[var(--surface)] p-1 sm:flex"
           >
             {navigation.map((item) => {
               const isActive = pathname === item.href;
@@ -44,8 +44,8 @@ export function SiteHeader() {
                   className={[
                     "rounded-full px-4 py-2 text-sm font-medium transition",
                     isActive
-                      ? "bg-white text-slate-950"
-                      : "text-white/70 hover:bg-white/8 hover:text-white",
+                      ? "bg-[var(--ink)] text-[var(--page-bg)]"
+                      : "text-[var(--muted)] hover:bg-[var(--accent-soft)] hover:text-[var(--ink)]",
                   ].join(" ")}
                 >
                   {item.label}
@@ -57,13 +57,13 @@ export function SiteHeader() {
           <div className="hidden items-center gap-2 sm:flex">
             <Link
               href="/auth/sign-in"
-              className="rounded-full px-4 py-2 text-sm font-medium text-white/72 transition hover:bg-white/6 hover:text-white"
+              className="rounded-full px-4 py-2 text-sm font-medium text-[var(--ink)]/82 transition hover:bg-[var(--accent-soft)] hover:text-[var(--ink)]"
             >
               Sign in
             </Link>
             <Link
               href="/auth/sign-up"
-              className="rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200"
+              className="rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[#140f0d] transition hover:opacity-92"
             >
               Sign up
             </Link>
@@ -71,7 +71,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className="border-t border-white/6 px-4 py-2 sm:hidden">
+      <div className="border-t border-[var(--line)] px-4 py-2 sm:hidden">
         <nav aria-label="Mobile navigation" className="mx-auto flex max-w-6xl gap-2 overflow-x-auto pb-1">
           {navigation.map((item) => {
             const isActive = pathname === item.href;
@@ -83,8 +83,8 @@ export function SiteHeader() {
                 className={[
                   "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition",
                   isActive
-                    ? "border-cyan-300 bg-cyan-300 text-slate-950"
-                    : "border-white/10 bg-white/5 text-white/70",
+                    ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--page-bg)]"
+                    : "border-[var(--line)] bg-[var(--surface)] text-[var(--ink)]/78",
                 ].join(" ")}
               >
                 {item.label}
