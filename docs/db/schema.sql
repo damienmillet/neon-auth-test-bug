@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict d9n2mnmgAdjodonnj574WC1KTuSYFlh4fjlkPbPQZRsvqJg2mEdH92nGOG0M4RV
+\restrict 8piF0zNMqrvMlT8o0yML0G9GzfP6n1pvHpQyfkKmbgRnIsBozbzd7jbVXijuoMZ
 
 -- Dumped from database version 17.8 (a284a84)
 -- Dumped by pg_dump version 18.2 (Homebrew)
@@ -366,6 +366,20 @@ ALTER TABLE ONLY neon_auth.verification
 
 
 --
+-- Name: cat_owner_id_idx; Type: INDEX; Schema: app; Owner: -
+--
+
+CREATE INDEX cat_owner_id_idx ON app.cat USING btree (owner_id);
+
+
+--
+-- Name: dog_owner_id_idx; Type: INDEX; Schema: app; Owner: -
+--
+
+CREATE INDEX dog_owner_id_idx ON app.dog USING btree (owner_id);
+
+
+--
 -- Name: account_userId_idx; Type: INDEX; Schema: neon_auth; Owner: -
 --
 
@@ -422,6 +436,22 @@ CREATE INDEX verification_identifier_idx ON neon_auth.verification USING btree (
 
 
 --
+-- Name: cat cat_owner_id_fkey; Type: FK CONSTRAINT; Schema: app; Owner: -
+--
+
+ALTER TABLE ONLY app.cat
+    ADD CONSTRAINT cat_owner_id_fkey FOREIGN KEY (owner_id) REFERENCES neon_auth."user"(id) ON DELETE SET NULL;
+
+
+--
+-- Name: dog dog_owner_id_fkey; Type: FK CONSTRAINT; Schema: app; Owner: -
+--
+
+ALTER TABLE ONLY app.dog
+    ADD CONSTRAINT dog_owner_id_fkey FOREIGN KEY (owner_id) REFERENCES neon_auth."user"(id) ON DELETE SET NULL;
+
+
+--
 -- Name: account account_userId_fkey; Type: FK CONSTRAINT; Schema: neon_auth; Owner: -
 --
 
@@ -473,5 +503,5 @@ ALTER TABLE ONLY neon_auth.session
 -- PostgreSQL database dump complete
 --
 
-\unrestrict d9n2mnmgAdjodonnj574WC1KTuSYFlh4fjlkPbPQZRsvqJg2mEdH92nGOG0M4RV
+\unrestrict 8piF0zNMqrvMlT8o0yML0G9GzfP6n1pvHpQyfkKmbgRnIsBozbzd7jbVXijuoMZ
 

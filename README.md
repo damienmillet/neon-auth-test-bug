@@ -18,12 +18,8 @@ npm install @neondatabase/serverless @neondatabase/auth@latest
 
 ```bash
 npm run db:up
-```
-
-- fixtures
-
-```bash
 npm run db:fixtures
+npm run db:doc:schema # to update the schema documentation
 ```
 
 - fetch data from neon database avec serverless
