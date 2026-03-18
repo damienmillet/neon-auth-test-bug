@@ -11,6 +11,13 @@ type PetRow = {
 
 export type Pet = PetRow;
 
+type NewPetInput = {
+  name: string;
+  breed: string | null;
+  ageYears: number | null;
+  ownerEmail: string | null;
+};
+
 function getSql() {
   const databaseUrl = process.env.DATABASE_URL;
 
@@ -57,4 +64,44 @@ export async function getDogs(): Promise<Pet[]> {
   `;
 
   return rows as Pet[];
+}
+
+async function getOwnerIdByEmail(ownerEmail: string | null) {
+  if (!ownerEmail) {
+    return null;
+  }
+
+  const sql = getSql();
+  const rows = await sql`
+    SELECT id
+    FROM neon_auth."user"
+    WHERE email = ${ownerEmail}
+    LIMIT 1
+  `;
+
+  return (rows as Array<{ id: string }>)[0]?.id ?? null;
+}
+
+export async function createCat(input: NewPetInput) {
+  const sql = getSql();
+  const ownerId = await getOwnerIdByEmail(input.ownerEmail);
+
+  await sql`
+    INSERT INTO app.cat (name, breed, age_years, owner_id)
+    VALUES (${input.name}, ${input.breed}, ${input.ageYears}, ${ownerId})
+  `;
+
+  return { linkedOwner: ownerId !== null };
+}
+
+export async function createDog(input: NewPetInput) {
+  const sql = getSql();
+  const ownerId = await getOwnerIdByEmail(input.ownerEmail);
+
+  await sql`
+    INSERT INTO app.dog (name, breed, age_years, owner_id)
+    VALUES (${input.name}, ${input.breed}, ${input.ageYears}, ${ownerId})
+  `;
+
+  return { linkedOwner: ownerId !== null };
 }

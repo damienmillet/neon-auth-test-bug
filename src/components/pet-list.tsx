@@ -5,6 +5,7 @@ type PetListProps = {
   title: string;
   description: string;
   emptyLabel: string;
+  form?: React.ReactNode;
 };
 
 export function PetList({
@@ -12,6 +13,7 @@ export function PetList({
   title,
   description,
   emptyLabel,
+  form,
 }: PetListProps) {
   const totalWithOwner = pets.filter((pet) => pet.owner_name).length;
 
@@ -41,6 +43,8 @@ export function PetList({
           </div>
         </div>
       </div>
+
+      {form ? <div className="mb-8">{form}</div> : null}
 
       {pets.length === 0 ? (
         <div className="rounded-[2rem] border border-dashed border-[var(--line)] bg-[var(--surface-strong)] p-10 text-sm text-[var(--muted)]">
