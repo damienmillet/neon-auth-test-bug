@@ -20,6 +20,12 @@ npm install @neondatabase/serverless @neondatabase/auth@latest
 npm run db:up
 ```
 
+- fixtures
+
+```bash
+npm run db:fixtures
+```
+
 - fetch data from neon database avec serverless
 
 - display data in the frontend (2 pages)
