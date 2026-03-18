@@ -10,20 +10,30 @@ npx create-next-app@latest . --typescript --biome --tailwind --app --src-dir  --
 
 ### auth avec neon
 
-```bash
+```shell
 npm install @neondatabase/serverless @neondatabase/auth@latest
 ```
 
 ### database neon schema
 
-```bash
+#### init database
+
+```shell
+npm run db:reset:fixtures
+```
+
+#### update schema
+
+```shell
 npm run db:up
 npm run db:fixtures
 npm run db:doc:schema # to update the schema documentation
 ```
 
-- fetch data from neon database avec serverless
+### fetch data from neon database avec serverless
 
-- display data in the frontend (2 pages)
+We created 2 pages, dogs and cats, to display data from the database.
 
-- wait 5min
+### wait 5min
+
+navigate from cats to dogs, and you shouldn't see the data from the database.
