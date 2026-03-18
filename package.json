@@ -7,11 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "db:reset": "dotenv -e .env.local -- sh -c 'psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -c \"BEGIN; DROP SCHEMA IF EXISTS app CASCADE; COMMIT;\" && psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f ./docs/db/schema.sql'",
+    "db:fixtures": "dotenv -e .env.local -- psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f ./db/fixtures/00_all.sql",
+    "db:up": "dotenv -e .env.local -- sh -c 'set -e; files=$(find ./db/migrations -maxdepth 1 -type f -name \"*.up.sql\" | sort); [ -n \"$files\" ] || { echo \"No up migrations found\"; exit 0; }; for f in $files; do echo \"Applying $f\"; psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f \"$f\"; done'",
+    "db:down": "dotenv -e .env.local -- sh -c 'set -e; files=$(find ./db/migrations -maxdepth 1 -type f -name \"*.down.sql\" | sort -r); [ -n \"$files\" ] || { echo \"No down migrations found\"; exit 0; }; for f in $files; do echo \"Reverting $f\"; psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f \"$f\"; done'",
+    "db:reset:fixtures": "npm run db:reset && npm run db:fixtures",
+    "db:doc:schema": "dotenv -e .env.local -- pg_dump \"$DATABASE_URL\" --schema-only --no-owner --no-privileges --exclude-schema=neon_auth --exclude-schema=pgrst --exclude-schema=pg_catalog --exclude-schema=information_schema > docs/db/schema.sql"
   },
   "dependencies": {
     "@neondatabase/auth": "^0.2.0-beta.1",
-    "@neondatabase/neon-js": "^0.2.0-beta.1",
     "@neondatabase/serverless": "^1.0.2",
     "next": "16.1.7",
     "react": "19.2.3",
