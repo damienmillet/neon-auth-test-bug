@@ -2,13 +2,13 @@
 
 ## Steps to run the project
 
-- install nextjs
+### install nextjs
 
 ```shell
 npx create-next-app@latest . --typescript --biome --tailwind --app --src-dir  --react-compiler --import-alias "@/*" 
 ```
 
-- auth avec neon
+### auth avec neon
 
 ```bash
 npm install @neondatabase/serverless @neondatabase/auth

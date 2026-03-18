@@ -10,7 +10,8 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@neondatabase/auth": "^0.1.0-beta.21",
+    "@neondatabase/auth": "^0.2.0-beta.1",
+    "@neondatabase/neon-js": "^0.2.0-beta.1",
     "@neondatabase/serverless": "^1.0.2",
     "next": "16.1.7",
     "react": "19.2.3",
